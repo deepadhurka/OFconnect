@@ -38,23 +38,6 @@ typedef int cc_of_ret;
 #define CC_OF_EEXIST   -9  /* already exists */
 #define CC_OF_EMISC    -10 /* misc error */
 
-/* String definitions for error codes */
-static const char * cc_of_errtable[] = {
-    "okay",
-    "syscall/library call failed",
-    "invalid attribute",
-    "retry",
-    "out of memory",
-    "max out on devices",
-    "hash table failures",
-    "max out on channels",
-    "unable to establish sockets",
-    "already exists",
-    "misc error",
-};
-
-inline const char *cc_of_strerror(int errnum);
-
 typedef enum cc_ofver_ {
     CC_OFVER_1_0   = 0,
     CC_OFVER_1_3,

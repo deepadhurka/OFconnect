@@ -65,7 +65,7 @@ CFLAGS := $(shell pkg-config --cflags glib-2.0) \
 LDFLAGS:= -shared -Wl,-soname,$(SONAME)
 
 TCFLAGS := $(shell pkg-config --cflags glib-2.0) \
-	$(INCLUDES) -Wall -Wextra -g 
+	$(INCLUDES) -Wall -Wextra -g -fPIC
 
 
 all: $(REALNAME)

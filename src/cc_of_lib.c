@@ -37,18 +37,6 @@ cc_of_dev_free_lockfree(uint32_t controller_ip_addr,
                         uint32_t switch_ip_addr,
                         uint16_t controller_L4_port);
 
-inline const char *cc_of_strerror(int errnum)
-{
-    if (errnum > 0) {
-	    return "Invalid errnum";
-    } else if (errnum <= -(int)CC_OF_ERRTABLE_SIZE){
-	    return "Unknown error";
-    } else {
-	    return cc_of_errtable[-errnum];
-    }
-}
-
-
 cc_of_ret
 cc_of_lib_init(of_dev_type_e dev_type)
 {

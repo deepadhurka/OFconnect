@@ -20,6 +20,33 @@
 
 #include "cc_of_util.h"
 
+/* String definitions for error codes */
+static const char * cc_of_errtable[] = {
+    "okay",
+    "syscall/library call failed",
+    "invalid attribute",
+    "retry",
+    "out of memory",
+    "max out on devices",
+    "hash table failures",
+    "max out on channels",
+    "unable to establish sockets",
+    "already exists",
+    "misc error",
+};
+
+const char *
+cc_of_strerror(int errnum)
+{
+    if (errnum > 0) {
+	    return "Invalid errnum";
+    } else if (errnum <= -(int)CC_OF_ERRTABLE_SIZE){
+	    return "Unknown error";
+    } else {
+	    return cc_of_errtable[-errnum];
+    }
+}
+
 /*-----------------------------------------------------------------------*/
 /* Forward Declarations                                                  */
 /*-----------------------------------------------------------------------*/

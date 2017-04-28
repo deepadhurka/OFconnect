@@ -30,6 +30,8 @@
 #define UNUSED __attribute__ ((__unused__))
 #endif
 
+const char *cc_of_strerror(int errnum);
+
 /* HTBL utilities */
 
 #define MAX_OFRW_HTBL_SIZE 10007
