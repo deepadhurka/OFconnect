@@ -841,8 +841,8 @@ pollthread_tc_5(test_data_t *tdata,
     g_thread_join(child_thr);
     
     adp_thr_mgr_free(&(tdata->tp_data));
-    g_mutex_free(sock_mutex);
-    g_cond_free(sock_cond);
+    g_mutex_clear(sock_mutex);
+    g_cond_clear(sock_cond);
     close(server_fd);
     close(accept_fd);
     close(connect_fd);

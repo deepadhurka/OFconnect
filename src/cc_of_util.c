@@ -709,9 +709,7 @@ cc_of_ret add_ofdev_rwsocket_lockfree(cc_ofdev_key_t key, int rwsock)
 {
     cc_ofdev_info_t *ofdev = NULL;
     int *list_elem;
-    gboolean new_entry;
     gpointer ht_dkey, ht_dinfo;
-    cc_of_ret retval;
 
     CC_LOG_DEBUG("%s(%d) dev controller ip 0x%x, switch ip 0x%x, "
                  "layer4 port %d", __FUNCTION__, __LINE__,
@@ -760,7 +758,6 @@ del_ofdev_rwsocket_lockfree(cc_ofdev_key_t key, int rwsock)
     cc_ofdev_info_t *ofdev = NULL;
     GList *tmp_list = NULL;
     int *tmp_rwsock = NULL;
-    gboolean new_entry;
     gpointer ht_key, ht_info;
 
     if (g_hash_table_lookup_extended(cc_of_global.ofdev_htbl,

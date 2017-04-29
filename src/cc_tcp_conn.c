@@ -268,9 +268,6 @@ cc_of_ret tcp_open_clientfd(cc_ofdev_key_t key, cc_ofchannel_key_t ofchann_key)
     cc_of_ret status = CC_OF_OK;
     int optval = 1;
     struct sockaddr_in serveraddr, localaddr;
-    struct timeval timeout;      
-    timeout.tv_sec = 10;
-    timeout.tv_usec = 0;
     int sockflags;
 
 
@@ -411,10 +408,7 @@ cc_of_ret tcp_accept(int listenfd, cc_ofdev_key_t key)
     cc_ofrw_key_t rw_key;
     cc_ofrw_info_t *rw_info = NULL;
     cc_ofrw_info_t rw_info_new;
-    struct timeval timeout;
     int sockflags;
-    timeout.tv_sec = 10;
-    timeout.tv_usec = 0;
     gboolean new_entry;
 
     if ((connfd = accept(listenfd, (struct sockaddr *) &clientaddr, 
@@ -428,6 +422,9 @@ cc_of_ret tcp_accept(int listenfd, cc_ofdev_key_t key)
     fcntl(connfd, F_SETFL, sockflags | O_NONBLOCK);
 
     #if 0
+    struct timeval timeout;
+    timeout.tv_sec = 10;
+    timeout.tv_usec = 0;
     if ((status = setsockopt(connfd, SOL_SOCKET, SO_RCVTIMEO,
                               (char *)&timeout, sizeof(timeout))) < 0) {
         CC_LOG_ERROR("%s(%d): %s", __FUNCTION__, __LINE__, 

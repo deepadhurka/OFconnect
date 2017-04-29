@@ -133,10 +133,6 @@ cc_of_lib_free()
                  "CC_OF_LIB cleanup started");
 
     if (cc_of_global.ofdev_htbl) {
-        GHashTableIter ofdev_iter;
-        cc_ofdev_key_t *dev_key;
-        cc_ofdev_info_t *dev_info;
-
         g_mutex_lock(&cc_of_global.ofdev_htbl_lock);
         g_hash_table_foreach_remove(cc_of_global.ofdev_htbl,
                                     cc_of_devfree_iter, NULL);
@@ -194,7 +190,7 @@ cc_of_lib_free()
     free(cc_of_global.oflog_file);
     //g_mutex_clear(&cc_of_global.oflog_lock);
   
-    return CC_OF_OK;
+    return status;
 }
 
 
@@ -337,7 +333,6 @@ cc_of_dev_free(uint32_t controller_ip_addr,
     adpoll_thr_msg_t thr_msg;
     GList *elem = NULL;
     gboolean new_entry;
-    adpoll_thread_mgr_t *tmgr = NULL;
 
     CC_LOG_INFO("%s(%d): %s", __FUNCTION__, __LINE__,
                  "CC_OF_LIB freeing device started");
@@ -524,15 +519,13 @@ cc_of_dev_free_lockfree(uint32_t controller_ip_addr,
                         uint16_t controller_L4_port)
 {
     cc_of_ret status = CC_OF_OK;
-    cc_ofdev_key_t *dkey, *ht_dkey = NULL;
+    cc_ofdev_key_t *dkey;
     gpointer ht_dev_key, ht_dev_info;
     cc_ofdev_info_t *ht_dinfo = NULL;
     char switch_ip[INET_ADDRSTRLEN];
     char controller_ip[INET_ADDRSTRLEN];
     adpoll_thr_msg_t thr_msg;
     GList *elem = NULL;
-    gboolean new_entry;
-    adpoll_thread_mgr_t *tmgr = NULL;
 
     dkey = g_malloc0(sizeof(cc_ofdev_key_t));    
     dkey->controller_ip_addr = controller_ip_addr;
@@ -579,7 +572,6 @@ cc_of_dev_free_lockfree(uint32_t controller_ip_addr,
     }
 
 
-    ht_dkey = (cc_ofdev_key_t *)ht_dev_key;
     ht_dinfo = (cc_ofdev_info_t *)ht_dev_info;
 
     // close all ofchannels for this device
